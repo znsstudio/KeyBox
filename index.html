@@ -42,7 +42,8 @@
 <li>Create profiles</li>
 <li>Assign systems to profile</li>
 <li>Assign profiles to users</li>
-<li>Generate and set authorized key file for systems or users</li>
+<li>Generate and distribute authorized key file for systems or users</li>
+<li>Create shell scripts and execute on systems or system profiles</li>
 </ol><h2>Prerequisites</h2>
 <p>SQLite3
 <a href="http://www.sqlite.org/download.html">http://www.sqlite.org/download.html</a></p>
@@ -52,7 +53,7 @@
 
 <p>**Should already be installed in Mac OS X v10.5 or greater</p>
 
-<p>Maven 2 or greater
+<p>Maven 3 or greater
 <a href="http://maven.apache.org">http://maven.apache.org</a></p>
 
 <p>Java JDK 1.6 or greater
@@ -72,7 +73,7 @@ export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH
 <pre><code>mvn package jetty:run
 </code></pre>
 
-<p>Open browser to http://localhost:8090/keybox</p>
+<p>Open browser to http://localhost:8090</p>
 
 <p>Login with </p>
 
