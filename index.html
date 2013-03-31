@@ -4,21 +4,35 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Keybox by skavanagh</title>
-
+      <link rel="icon" href="/images/keybox.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <!--[if lt IE 9]>
+      <!-- Add jQuery library -->
+      <script type="text/javascript" src="/javascripts/jquery-1.9.0.min.js"></script>
+
+      <!-- Add fancyBox -->
+      <link rel="stylesheet" href="/javascripts/fancybox/jquery.fancybox.css?v=2.1.4" type="text/css" media="screen" />
+      <script type="text/javascript" src="/javascripts/fancybox/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+      <script type="text/javascript">
+          $(document).ready(function() {
+          $(".fancybox").fancybox();
+          });
+      </script>
+
+      <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
   <body>
     <div class="wrapper">
       <header>
-        <h1>Keybox</h1>
-        <p>Manage and Distribute OpenSSH Public Keys </p>
+        <h1> <div style="float: left;margin-top: -5px;margin-left: -10px"><img src="/images/keybox_50x38.png"/></div>
+            Keybox</h1>
+        <p>Manage systems, better!</p>
         <p class="view"><a href="https://github.com/skavanagh/KeyBox">View the Project on GitHub <small>skavanagh/KeyBox</small></a></p>
         <ul>
           <li><a href="https://github.com/skavanagh/KeyBox/zipball/master">Download <strong>ZIP File</strong></a></li>
@@ -33,6 +47,22 @@
 
 <p>KeyBox provides a way to manage OpenSSH v2 public keys and can start a web-based ssh terminal to execute commands and
 scripts on multiple ssh sessions simultaneously.</p>
+
+<h2>Screen Shots</h2>
+
+<p>
+
+
+    <a class="fancybox" rel="group" href="/images/screenshots/ScreenShot1.png"><img src="/images/screenshots/ScreenShot1_SM.png" alt="" /></a>
+    <a class="fancybox" rel="group" href="/images/screenshots/ScreenShot2.png"><img src="/images/screenshots/ScreenShot2_SM.png" alt="" /></a>
+    <a class="fancybox" rel="group" href="/images/screenshots/ScreenShot3.png"><img src="/images/screenshots/ScreenShot3_SM.png" alt="" /></a>
+    <a class="fancybox" rel="group" href="/images/screenshots/ScreenShot4.png"><img src="/images/screenshots/ScreenShot4_SM.png" alt="" /></a>
+    <a class="fancybox" rel="group" href="/images/screenshots/ScreenShot5.png"><img src="/images/screenshots/ScreenShot5_SM.png" alt="" /></a>
+    <a class="fancybox" rel="group" href="/images/screenshots/ScreenShot6.png"><img src="/images/screenshots/ScreenShot6_SM.png" alt="" /></a>
+    <a class="fancybox" rel="group" href="/images/screenshots/ScreenShot7.png"><img src="/images/screenshots/ScreenShot7_SM.png" alt="" /></a>
+    <a class="fancybox" rel="group" href="/images/screenshots/ScreenShot8.png"><img src="/images/screenshots/ScreenShot8_SM.png" alt="" /></a>
+
+</p>
 
 <h2>Prerequisites</h2>
 
@@ -100,7 +130,7 @@ password:changeme
 <li>Assign systems to profile</li>
 <li>Assign profiles to users</li>
 <li>Generate and distribute authorized key file for systems or users</li>
-<li>Start composite-ssh sessions or create or execute a script across multiple sessions</li>
+<li>Start composite-ssh sessions or create and execute a script across multiple sessions</li>
 </ol><h2>Author</h2>
 
 <p>Sean Kavanagh - <a href="mailto:sean.p.kavanagh6@gmail.com">sean.p.kavanagh6@gmail.com</a></p>
