@@ -135,6 +135,10 @@ password:changeme
 <li>Start composite-ssh sessions or create and execute a script across multiple sessions</li>
 </ol>
 
+<h2>Stuff to Know</h2>
+<p>KeyBox generates its own ssh-key with a unique passphrase upon initial startup. To regenerate KeyBox's public-key delete 'id_rsa' and 'id_rsa.pub' in the classes/com/keybox/common/db directory and restart the application.</p>
+
+<p>The SQLite DB may be backed up by copying 'keybox.db' in the classes/com/keybox/common/db directory.</p>
 
 <h2>Demos</h2>
 <p>
