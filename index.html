@@ -99,6 +99,16 @@ scripts on multiple ssh sessions simultaneously.</p>
   <a href="https://github.com/skavanagh/KeyBox/releases">https://github.com/skavanagh/KeyBox/releases</a> 
 </p>
 
+<p>Export environment variables</p>
+
+<pre><code> export JAVA_HOME=/path/to/jdk
+ export PATH=$JAVA_HOME/bin:$PATH
+</code></pre>
+
+<p>Start KeyBox</p>
+
+<pre><code>./startKeyBox.sh
+</code></pre>
 
 <h2>To Build from Source and Run with Maven</h2>
 
@@ -115,18 +125,6 @@ export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH
 </code></pre>
 
 <p>**Note: Doing a mvn clean will delete the SQLite DB and wipe out all the data.</p>
-
-
-<p>Export environment variables</p>
-
-<pre><code> export JAVA_HOME=/path/to/jdk
- export PATH=$JAVA_HOME/bin:$PATH
-</code></pre>
-
-<p>Start KeyBox</p>
-
-<pre><code>./startKeyBox.sh
-</code></pre>
 
 <h2>Using KeyBox</h2>
 
