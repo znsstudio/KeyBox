@@ -77,14 +77,6 @@ scripts on multiple ssh sessions simultaneously.</p>
 
 <h2>Prerequisites</h2>
 
-<p>SQLite3
-<a href="http://www.sqlite.org/download.html">http://www.sqlite.org/download.html</a></p>
-
-<pre><code>sudo apt-get install sqlite3 sqlite3-dev 
-</code></pre>
-
-<p>**Should already be installed in Mac OS X v10.5 or greater</p>
-
 <p>Java JDK 1.6 or greater
 <a href="http://www.oracle.com/technetwork/java/javase/overview/index.html">http://www.oracle.com/technetwork/java/javase/overview/index.html</a></p>
 
@@ -124,7 +116,7 @@ export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH
 <pre><code>mvn package jetty:run
 </code></pre>
 
-<p>**Note: Doing a mvn clean will delete the SQLite DB and wipe out all the data.</p>
+<p>**Note: Doing a mvn clean will delete the H2 DB and wipe out all the data.</p>
 
 <h2>Using KeyBox</h2>
 
@@ -151,7 +143,7 @@ password:changeme
 <h2>Stuff to Know</h2>
 <p>KeyBox generates its own ssh-key with a unique passphrase upon initial startup. To regenerate KeyBox's public-key delete 'id_rsa' and 'id_rsa.pub' in the classes/com/keybox/common/db directory and restart the application.</p>
 
-<p>The SQLite DB may be backed up by copying 'keybox.db' in the classes/com/keybox/common/db directory.</p>
+<p>The H2 DB may be backed up by copying 'keybox.h2.db' in the classes/com/keybox/common/db directory.</p>
 
 <h2>Demos</h2>
 <p>
