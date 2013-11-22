@@ -55,22 +55,21 @@
 
 <h2>About</h2>
 
-<p>KeyBox provides a way to manage OpenSSH v2 public keys and can start a web-based ssh terminal to execute commands and
-scripts on multiple ssh sessions simultaneously.</p>
+<p>
+A web-based ssh console to execute commands and manage multiple systems simultaneously. KeyBox allows you to share terminal commands and upload files to all your systems. Once the sessions have been opened you can select a single system or any combination to run your commands. Also, additional system administrators can be added and their terminal sessions and history can be audited.
+</p>
 
 <h2>Screen Shots</h2>
 
 <p>
 
 
-    <a class="fancybox" rel="group" href="images/screens/screenshot1.png"><img src="images/screens/screenshot1_SM.png" alt="" /></a>
     <a class="fancybox" rel="group" href="images/screens/screenshot2.png"><img src="images/screens/screenshot2_SM.png" alt="" /></a>
     <a class="fancybox" rel="group" href="images/screens/screenshot3.png"><img src="images/screens/screenshot3_SM.png" alt="" /></a>
     <a class="fancybox" rel="group" href="images/screens/screenshot4.png"><img src="images/screens/screenshot4_SM.png" alt="" /></a>
     <a class="fancybox" rel="group" href="images/screens/screenshot5.png"><img src="images/screens/screenshot5_SM.png" alt="" /></a>
     <a class="fancybox" rel="group" href="images/screens/screenshot6.png"><img src="images/screens/screenshot6_SM.png" alt="" /></a>
     <a class="fancybox" rel="group" href="images/screens/screenshot7.png"><img src="images/screens/screenshot7_SM.png" alt="" /></a>
-    <a class="fancybox" rel="group" href="images/screens/screenshot8.png"><img src="images/screens/screenshot8_SM.png" alt="" /></a>
 
 </p>
 
@@ -102,6 +101,10 @@ scripts on multiple ssh sessions simultaneously.</p>
 <pre><code>./startKeyBox.sh
 </code></pre>
 
+<p>How to Configure SSL in Jetty (it is a good idea to add or generate your own unique certificate)<br/>
+  <a href="http://wiki.eclipse.org/Jetty/Howto/Configure_SSL">http://wiki.eclipse.org/Jetty/Howto/Configure_SSL</a>
+</p>
+
 <h2>To Build from Source and Run with Maven</h2>
 
 <p>Export environment variables</p>
@@ -120,7 +123,7 @@ export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH
 
 <h2>Using KeyBox</h2>
 
-<p>Open browser to http://localhost:8090</p>
+<p>Open browser to https://<whatever ip>:8443</p>
 
 <p>Login with </p>
 
@@ -131,32 +134,26 @@ password:changeme
 <p>Steps:</p>
 
 <ol>
-<li>Create users with public key</li>
 <li>Create systems</li>
 <li>Create profiles</li>
 <li>Assign systems to profile</li>
 <li>Assign profiles to users</li>
-<li>Generate and distribute authorized key file for systems or users</li>
+<li>Users can login to create sessions on assigned systems</li>
 <li>Start composite-ssh sessions or create and execute a script across multiple sessions</li>
+<li>Add additional public keys to systems</li>
+<li>Audit session history</li>
 </ol>
 
-<h2>Stuff to Know</h2>
-<p>KeyBox generates its own ssh-key with a unique passphrase upon initial startup. To regenerate KeyBox's public-key delete 'id_rsa' and 'id_rsa.pub' in the classes/com/keybox/common/db directory and restart the application.</p>
-
-<p>The H2 DB may be backed up by copying 'keybox.h2.db' in the classes/com/keybox/common/db directory.</p>
-
-<h2>Demos</h2>
-<p>
-<iframe width="420" height="315" src="http://www.youtube.com/embed/__hIFuNYwTc" frameborder="0" allowfullscreen></iframe>
-
-<iframe width="420" height="315" src="http://www.youtube.com/embed/uSodV4EJ5MU" frameborder="0" allowfullscreen></iframe>
-  
-  
-</p>
 
 <h2>Author</h2>
 
-<p>Sean Kavanagh - <a href="mailto:sean.p.kavanagh6@gmail.com">sean.p.kavanagh6@gmail.com</a></p>
+
+<p><strong>Sean Kavanagh</strong></p>
+
+<ul>
+<li><a href="mailto:sean.p.kavanagh6@gmail.com">sean.p.kavanagh6@gmail.com</a></li>
+<li><a href="https://twitter.com/spkavanagh6">https://twitter.com/spkavanagh6</a></li>
+</ul><p>
 
 <p><a href="http://githalytics.com/skavanagh/KeyBox"><img src="https://cruel-carlota.pagodabox.com/1d63734e95044db2bb95500235c0df9e" alt="githalytics.com alpha" title="githalytics.com"></a></p>
       </section>
