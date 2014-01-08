@@ -76,13 +76,18 @@ A web-based ssh console to execute commands and manage multiple systems simultan
 
 <h2>Prerequisites</h2>
 
-<p>Java JDK 1.6 or greater
+<p>Java JDK 1.7 or greater
 <a href="http://www.oracle.com/technetwork/java/javase/overview/index.html">http://www.oracle.com/technetwork/java/javase/overview/index.html</a></p>
+
+<p>Browser with Web Sockets support <a href="http://caniuse.com/websockets">http://caniuse.com/websockets</a>
+<br/>
+**Note: In Safari if using a self-signed certificate you must import the certificate into your Keychain. Select 'Show Certificate' -> 'Always Trust' when prompted in Safari
+</p>
+
+<p>Must run on *nix with OpenSSH version 2</p>
 
 <p>Maven 3 or greater ( Only needed if building from source )
 <a href="http://maven.apache.org">http://maven.apache.org</a></p>
-
-<p>Must run on *nix with OpenSSH version 2</p>
 
 <h2>To Run Jetty Build</h2>
 
