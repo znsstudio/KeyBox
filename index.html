@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
           content="A web-based SSH console that executes commands on multiple shells. KeyBox allows you to manage keys, share terminal commands, and upload files to multiple systems simultaneously."/>
-    <meta name="keywords" content="Web-based, ssh, multi-terminal, terminal, ssh-keygen, public keys, management"/>
+    <meta name="keywords" content="Web-based, ssh, multi-terminal, terminal, bastion host, ssh-keygen, public keys, management"/>
     <meta name="author" content="Sean Kavanagh">
     <link rel="shortcut icon" href="img/keybox.ico">
 
@@ -61,6 +61,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="#about">About</a></li>
                         <li><a href="#setup">Install</a></li>
+                        <li><a href="#why">Why KeyBox?</a></li>
                         <li><a href="#contact">Contact</a></li>
                         <li><a href="#see_more">See More</a></li>
                     </ul>
@@ -312,6 +313,37 @@
         <div class="col-md-5">
             <img class="featurette-image img-responsive" data-src="img/500x500/audit_sessions.png/500x500/auto"
                  src="img/500x500/audit_sessions.png" alt="Audit SSH Sessions"/></img>
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+    <div class="row featurette">
+        <div class="col-md-5">
+            <a name="why"></a>
+
+            <h2 class="featurette-heading">Why KeyBox?</h2>
+
+            <p class="lead">
+                Some of the ideas that I've been trying to explore with this project...
+
+
+            <ul>
+                    <li>Centralized user control<span class="text-muted"> - Grant access to systems through administrative profiles and user accounts.</span></li>
+                    <li>Auditable (experimental)<span class="text-muted"> - Audit the administrative activity on the systems. Prevents malicious users from deleting history or logs.
+</span></li>
+                    <li>Prevent SSH key sprawl and access mismanagement<span class="text-muted"> - Manage public SSH keys, assign keys to systems through profiles, and distribute keys to systems.</span></li>
+                    <li>Productivity<span class="text-muted"> - Instead of making the same changes on systems individually, share commands across systems.  Eliminates redundancy when patching or debugging issues.
+</span></li>
+                    <li>Portability<span class="text-muted"> - Run through SSH through the browser without requiring client software. </span></li>
+                    <li>Infrastructure protection<span class="text-muted"> - A hardened version of KeyBox could act  as a bastion host allowing for centralized administration through SSH, proxying traffic into a DMZ or perimeter network. (see diagram) </span></li>
+
+        </ul>
+            </p>
+
+        </div>
+        <div class="col-md-7">
+            <img class="featurette-image img-responsive" data-src="img/keybox_dia.jpg/800x468/auto"
+                 src="img/keybox_dia.jpg" alt="Audit SSH Sessions"/></img>
         </div>
     </div>
 
