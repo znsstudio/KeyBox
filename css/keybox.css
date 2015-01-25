@@ -8,3 +8,17 @@
 .nav li iframe {
     padding-top: 10px;
 }
+
+.featurette-heading {
+    margin: 8px 0;
+    font-size: 25px;
+}
+.featurette-divider {
+    margin: 25px 0;
+    
+}
+
+.lead {
+    font-size: 18px;
+    
+}

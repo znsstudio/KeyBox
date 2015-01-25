@@ -15,7 +15,6 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" type="text/css" rel="stylesheet"/>
-    <link href="css/keybox.css" type="text/css" rel="stylesheet"/>
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]>
@@ -29,6 +28,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/carousel.css" type="text/css" rel="stylesheet"/>
+    <link href="css/keybox.css" type="text/css" rel="stylesheet"/>
 
     <style type="text/css">
         .carousel-caption {
@@ -160,7 +160,7 @@
 
             <div class="container">
                 <div class="carousel-caption">
-                    <h1><b>Manage &amp; Distribute Public SSH Keys</b></h1>
+                    <h1><b>Manage Public SSH Keys</b></h1>
 
                     <p>Define, manage, and distribute public SSH keys to defined systems</p>
 
@@ -265,8 +265,8 @@
                 manage and distribute public keys that have been setup and defined.</p>
         </div>
         <div class="col-md-5">
-            <img class="featurette-image img-responsive" data-src="img/500x500/terminals.png/500x500/auto"
-                 src="img/500x500/terminals.png" alt="Composite SSH Terminals"/></img>
+            <img class="featurette-image img-responsive" data-src="img/500x300/terminals.png/500x300/auto"
+                 src="img/500x300/terminals.png" alt="Composite SSH Terminals"/></img>
         </div>
     </div>
 
@@ -283,8 +283,8 @@
 
         </div>
         <div class="col-md-5" style="float:left;">
-            <img class="featurette-image img-responsive" data-src="img/500x500/select_terminal_windows.png/500x500/auto"
-                 src="img/500x500/select_terminal_windows.png" alt="Select Invidual Terminals"/></img>
+            <img class="featurette-image img-responsive" data-src="img/500x300/select_terminal_windows.png/500x300/auto"
+                 src="img/500x300/select_terminal_windows.png" alt="Select Invidual Terminals"/></img>
         </div>
     </div>
     
@@ -298,10 +298,10 @@
 
             <p class="lead">Supports Two-Factor via <a href="https://fedorahosted.org/freeotp" target="_blank">FreeOTP</a> or <a href="https://github.com/google/google-authenticator" target="_blank">Google Authenticator</a> on your Android or iOS device.</p>
             <div class="panel panel-default">
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover small">
                 <thead>
                 <tr>
-                    <th colspan="2">FreeOTP</th>
+                    <th colspan="2" class="info">FreeOTP</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -316,7 +316,7 @@
                 </tbody>
                 <thead>
                 <tr>
-                    <th colspan="2">Google Authenticator</th>
+                    <th colspan="2" class="info">Google Authenticator</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -334,8 +334,8 @@
 
         </div>
         <div class="col-md-5">
-            <img class="featurette-image img-responsive" data-src="img/500x500/manage_users.png/500x500/auto"
-                 src="img/500x500/two-factor.png" alt="Two-Factor Authentication"/></img>
+            <img class="featurette-image img-responsive" data-src="img/500x300/manage_users.png/500x300/auto"
+                 src="img/500x300/two-factor.png" alt="Two-Factor Authentication"/></img>
         </div>
     </div>
     
@@ -353,8 +353,8 @@
 
         </div>
         <div class="col-md-5" style="float:left;">
-            <img class="featurette-image img-responsive" data-src="img/500x500/manage_users.png/500x500/auto"
-                 src="img/500x500/manage_users.png" alt="Manage Users"/></img>
+            <img class="featurette-image img-responsive" data-src="img/500x300/manage_users.png/500x300/auto"
+                 src="img/500x300/manage_users.png" alt="Manage Users"/></img>
         </div>
     </div>
 
@@ -363,15 +363,16 @@
         <div class="col-md-7">
             <a name="public_keys"></a>
 
-            <h2 class="featurette-heading">Manage &amp; distribute public SSH keys</h2>
+            <h2 class="featurette-heading">Manage, distribute, &amp; disable public SSH keys</h2>
 
             <p class="lead">KeyBox works through the authorized_keys file on systems that are registered. Assign and
-                manage public SSH keys for users. Define keys and apply them to all systems or a system profile.</p>
+                manage public SSH keys for users. Define keys and apply them to all systems or a system profile. 
+                "Full Access" users can review and disable any administrative key forcing rotation.  </p>
 
         </div>
         <div class="col-md-5">
-            <img class="featurette-image img-responsive" data-src="img/500x500/define_public_keys.png/500x500/auto"
-                 src="img/500x500/define_public_keys.png" alt="Manage SSH Public Keys"/></img>
+            <img class="featurette-image img-responsive" data-src="img/500x300/disable_keys.png/500x300/auto"
+                 src="img/500x300/disable_keys.png" alt="Manage SSH Public Keys"/></img>
         </div>
     </div>
 
@@ -383,12 +384,12 @@
             <h2 class="featurette-heading">Audit SSH sessions</h2>
 
             <p class="lead">Users with full-privileges may audit other administrative user sessions. Ensure systems are
-                managed within organizational guidelines. </p>
+                managed within organizational guidelines. (Disabled by default) </p>
 
         </div>
         <div class="col-md-5" style="float:left;">
-            <img class="featurette-image img-responsive" data-src="img/500x500/audit_sessions.png/500x500/auto"
-                 src="img/500x500/audit_sessions.png" alt="Audit SSH Sessions"/></img>
+            <img class="featurette-image img-responsive" data-src="img/500x300/audit_sessions.png/500x300/auto"
+                 src="img/500x300/audit_sessions.png" alt="Audit SSH Sessions"/></img>
         </div>
     </div>
 
@@ -441,8 +442,8 @@
 
         </div>
         <div class="col-md-5" style="float:right;">
-            <img class="featurette-image img-responsive" data-src="img/500x500/ec2box.png/500x500/auto"
-                 src="img/500x500/ec2box.png" alt="EC2Box: Web-based SSH console for AWS EC2"/></img>
+            <img class="featurette-image img-responsive" data-src="img/500x300/ec2box.png/500x300/auto"
+                 src="img/500x300/ec2box.png" alt="EC2Box: Web-based SSH console for AWS EC2"/></img>
         </div>
     </div>
 
@@ -462,8 +463,8 @@
 
         </div>
         <div class="col-md-5" >
-            <img class="featurette-image img-responsive" data-src="img/500x500/keybox-openshift.png/500x500/auto"
-                 src="img/500x500/keybox-openshift.png" alt="KeyBox-OpenShift: Web-based SSH console for OpenShfit"/></img>
+            <img class="featurette-image img-responsive" data-src="img/500x300/keybox-openshift.png/500x300/auto"
+                 src="img/500x300/keybox-openshift.png" alt="KeyBox-OpenShift: Web-based SSH console for OpenShfit"/></img>
         </div>
     </div>
 
@@ -475,27 +476,25 @@
 
     <!-- FOOTER -->
     <footer>
-        <p>
         <table>
             <tr>
                 <td>
-                    <iframe src="http://ghbtns.com/github-btn.html?user=skavanagh&repo=KeyBox&type=watch&count=true&size=large"
-                            height="30" width="170" frameborder="0" scrolling="0" style="width:170px; height: 30px;"
+                    <iframe src="http://ghbtns.com/github-btn.html?user=skavanagh&repo=KeyBox&type=watch&count=true"
+                            height="30" width="100" frameborder="0" scrolling="0" style="width:100px; height: 30px;"
                             allowTransparency="true"></iframe>
                 </td>
                 <td>
-                    <iframe src="http://ghbtns.com/github-btn.html?user=skavanagh&repo=KeyBox&type=fork&count=true&size=large"
-                            height="30" width="170" frameborder="0" scrolling="0" style="width:170px; height: 30px;"
+                    <iframe src="http://ghbtns.com/github-btn.html?user=skavanagh&repo=KeyBox&type=fork&count=true"
+                            height="30" width="100" frameborder="0" scrolling="0" style="width:100px; height: 30px;"
                             allowTransparency="true"></iframe>
                 </td>
                 <td>
-                    <iframe src="http://ghbtns.com/github-btn.html?user=skavanagh&type=follow&count=true&size=large"
-                            height="30" width="240" frameborder="0" scrolling="0" style="width:240px; height: 30px;"
+                    <iframe src="http://ghbtns.com/github-btn.html?user=skavanagh&type=follow&count=true"
+                            height="30" width="168" frameborder="0" scrolling="0" style="width:168px; height: 30px;"
                             allowTransparency="true"></iframe>
                 </td>
             </tr>
         </table>
-        </p>
         <p class="pull-right"><a href="#">Back to top</a></p>
 
         <p>&copy; 2014 Sean Kavanagh</p>
