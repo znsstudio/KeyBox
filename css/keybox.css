@@ -14,16 +14,33 @@
     font-size: 25px;
 }
 .featurette-divider {
-    margin: 25px 0;
+    margin: 50px 0;
     
 }
 
 .lead {
     font-size: 18px;
 }
+
 .glyphicon-lg {
     padding: 5px 20px;
     font-size: 24px;
     line-height: 1.45;
     border-radius: 6px;
+}
+
+.carousel-caption {
+    text-align: left;
+    color: #99CCFF;
+}
+
+.carousel-inner > .item > img {
+    height:450px;
+}
+.carousel {
+    height:450px;
+    margin-bottom: 20px;
+}
+.carousel .item{
+    height:450px;
 }
