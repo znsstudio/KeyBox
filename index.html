@@ -256,7 +256,7 @@
             <p class="lead">KeyBox generates its own public/private SSH key upon initial startup (To specify a custom SSH key pair, see <a href="https://github.com/skavanagh/KeyBox#supplying-a-custom-ssh-key-pair">here</a>). This key is placed in
                 the authorized_key file of any systems that are registered. KeyBox allows you to share terminal commands
                 and upload files to all your systems, allowing access through the application. Once the sessions have
-                been opened you can select a single system or any combination to run your commands. Additional system
+                been opened you can select a single terminal window or any combination to run your commands. Additional system
                 administrators can be added and their terminal sessions and history can be audited. Also, KeyBox can
                 manage and distribute public keys that have been setup and defined.</p>
         </div>
@@ -274,7 +274,7 @@
             <h2 class="featurette-heading">Composite SSH terminals. <span class="text-muted">Total control.</span></h2>
 
             <p class="lead">Execute commands on multiple systems simultaneously. Upload files to selected systems. Once
-                the sessions have been opened you can select a single system or any combination to run your
+                the sessions have been opened you can select a single terminal window or any combination to run your
                 commands. </p>
 
         </div>
@@ -344,8 +344,8 @@
             <h2 class="featurette-heading">Control user access. <span class="text-muted">Secure your systems.</span>
             </h2>
 
-            <p class="lead">Create users and assign them system profiles. Users can login to KeyBox via the web-console,
-                but have limited privileges and can only access systems that have been assigned in their profile.</p>
+            <p class="lead">Create users and assign system profiles. Users can login to KeyBox via the web-console,
+                but have limited privileges and can only access systems that have been assigned through their profile.</p>
 
         </div>
         <div class="col-md-5" style="float:left;">
@@ -363,7 +363,7 @@
 
             <p class="lead">KeyBox works through the authorized_keys file on systems that are registered. Assign and
                 manage public SSH keys for users. Define keys and apply them to all systems or a system profile. 
-                "Full Access" users can review and disable any administrative key forcing rotation.  </p>
+                Users with full-privileges may review and disable any administrative key forcing rotation.  </p>
 
         </div>
         <div class="col-md-5">
@@ -404,10 +404,10 @@
                     <li>Centralized user control<span class="text-muted"> - Grant access to systems through administrative profiles and user accounts.</span></li>
                     <li>Auditable (experimental)<span class="text-muted"> - Audit the administrative activity on the systems. Prevents malicious users from deleting history or logs.
 </span></li>
-                    <li>Prevent SSH key sprawl and access mismanagement<span class="text-muted"> - Manage public SSH keys, assign keys to systems through profiles, and distribute keys to systems.</span></li>
+                    <li>Prevent SSH key sprawl and access mismanagement<span class="text-muted"> - Administrators set keys and distribute to systems through profiles. Any administrative key can be disabled which forces key rotation.</span></li>
                     <li>Productivity<span class="text-muted"> - Instead of making the same changes on systems individually, share commands across systems.  Eliminates redundancy when patching or debugging issues.
 </span></li>
-                    <li>Portability<span class="text-muted"> - Run SSH through the browser without requiring client software. </span></li>
+                    <li>Portability<span class="text-muted"> - Run SSH through the browser without requiring client software or browser plugins. </span></li>
                     <li>Layered Protocols<span class="text-muted"> - Protocols are stacked (TLS/SSL + SSH) so infrastructure cannot be exposed through tunneling / port forwarding.</span></li>
                     <li>Infrastructure protection<span class="text-muted"> - A hardened version of KeyBox could act  as a bastion host allowing for centralized administration through SSH, proxying traffic into a DMZ or perimeter network. (see diagram) </span></li>
 
