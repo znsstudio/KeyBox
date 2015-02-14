@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
           content="A web-based SSH console that executes commands on multiple shells. KeyBox allows you to manage keys, share terminal commands, and upload files to multiple systems simultaneously."/>
-    <meta name="keywords" content="Web-based, ssh, multi-terminal, terminal, bastion host, ssh-keygen, public keys, management"/>
+    <meta name="keywords"
+          content="Web-based, ssh, multi-terminal, terminal, bastion host, ssh-keygen, public keys, management"/>
     <meta name="author" content="Sean Kavanagh">
     <link rel="shortcut icon" href="img/keybox.ico">
 
@@ -47,23 +48,25 @@
                         <span class="icon-bar"></span>
                     </button>
                     <div class="navbar-brand">
-                        <div class="nav-img"><img src="img/keybox_50x38.png"/></div><div style="float:left">KeyBox</div>
+                        <div class="nav-img"><img src="img/keybox_50x38.png"/></div>
+                        <div style="float:left">KeyBox</div>
                     </div>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="#about">About</a></li>
                         <li><a href="#setup">Install</a></li>
-                        <li><a href="#why">Why KeyBox?</a></li>
+                        <li><a href="#why">Why KeyBox</a></li>
                         <li><a href="#contact">Contact</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">See More <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">See More <b
+                                    class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#see_more_ec2box">EC2Box</a></li>
                                 <li><a href="#see_more_openshift">KeyBox-OpenShift</a></li>
                             </ul>
                         </li>
-                        
+
                     </ul>
                     <div class="navbar-collapse collapse navbar-right">
                         <ul class="nav navbar-nav" style="vertical-align: middle">
@@ -122,7 +125,7 @@
                 </div>
             </div>
         </div>
-         <div class="item">
+        <div class="item">
             <img src="img/1500x450/two-factor.png" alt="Composite SSH Terminals">
 
             <div class="container">
@@ -198,13 +201,15 @@
 
             <h2>KeyBox</h2>
 
-        
-    	    <p>KeyBox is a web-based SSH console that centrally manages administrative access to systems. KeyBox combines key management and administration through profiles assigned to defined users.</p>
 
-            <p><a class="btn btn-default" href="javascript:window.open('https://github.com/skavanagh/KeyBox');"
+            <p>KeyBox is a web-based SSH console that centrally manages administrative access to systems. KeyBox
+                combines key management and administration through profiles assigned to defined users.</p>
+
+            <p><a class="btn btn-primary" href="javascript:window.open('https://github.com/skavanagh/KeyBox');"
                   role="button">View on Github &raquo;</a>
-                  	<a class="btn btn-default" href="javascript:window.open('https://github.com/skavanagh/KeyBox/releases');"
-                  role="button">Download Latest &raquo;</a>
+                <a class="btn btn-primary"
+                   href="javascript:window.open('https://github.com/skavanagh/KeyBox/releases');"
+                   role="button">Download Latest &raquo;</a>
             </p>
 
 
@@ -217,7 +222,7 @@
 
             <p>Requires JDK 1.7 or greater<br/>A web socket supported browser</p>
 
-            <p><a class="btn btn-default" href="javascript:window.open('https://github.com/skavanagh/KeyBox#keybox');"
+            <p><a class="btn btn-success" href="javascript:window.open('https://github.com/skavanagh/KeyBox#keybox');"
                   role="button">View README &raquo;</a></p>
         </div>
 
@@ -228,19 +233,36 @@
             <h2>Contact</h2>
 
             <p>Do you have questions or ideas?<br/>Feel free to reach out. </p>
-            <p>If you find these projects useful please feel free to contribute, spread the word, or take a look at my <a href="http://amzn.com/w/2X6JV7E0J6HYF">Amazon wishlist</a></p>
-            <table align="center" >
-            <tr>
-                <td><a href="https://twitter.com/spkavanagh6" target="_blank" alt="Follow me on Twitter"><img src="img/twitter.png"/></a></td>
-                <td><a href="mailto:sean.p.kavanagh6@gmail.com" target="_blank" alt="Email" ><span class="glyphicon glyphicon-lg glyphicon-envelope" aria-hidden="true" ></span></a></td>
-            </tr>
+
+            <table align="center">
+                <tr>
+                    <td><a href="https://twitter.com/spkavanagh6" target="_blank" alt="Follow me on Twitter"><img
+                            src="img/twitter.png"/></a></td>
+                    <td><a href="mailto:sean.p.kavanagh6@gmail.com" target="_blank" alt="Email"><span
+                            class="glyphicon glyphicon-lg glyphicon-envelope" aria-hidden="true"></span></a></td>
+                </tr>
             </table>
+
+            <p>If you find these projects useful please feel free to contribute, spread the word, take a look at my <a
+                    href="http://amzn.com/w/2X6JV7E0J6HYF">Amazon wishlist</a>, or donate.</p>
+
+            <div>
+
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                    <input type="hidden" name="cmd" value="_s-xclick">
+                    <input type="hidden" name="hosted_button_id" value="54K7AB3NRBM76">
+                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0"
+                           name="submit" alt="PayPal - The safer, easier way to pay online!">
+                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1"
+                         height="1">
+                </form>
+
+            </div>
+
 
         </div>
 
 
-        
-        
     </div>
     <!-- /.row -->
 
@@ -253,11 +275,24 @@
 
             <h2 class="featurette-heading">About KeyBox</h2>
 
-            <p class="lead">KeyBox generates its own public/private SSH key upon initial startup (To specify a custom SSH key pair, see <a href="https://github.com/skavanagh/KeyBox#supplying-a-custom-ssh-key-pair">here</a>). This key is placed in
+            <p class="lead">KeyBox generates its own public/private SSH key upon initial startup (To specify a custom
+                SSH key pair, see <a href="https://github.com/skavanagh/KeyBox#supplying-a-custom-ssh-key-pair">here</a>).
+                This key is placed in
                 the authorized_key file of the registered systems. KeyBox allows you to share terminal commands
                 and upload files to multiple systems simultaneously. Once the sessions have
-                been opened you can select a single terminal window or any combination to run your commands. Additional system
-                administrators can be added and their terminal sessions and history audited. Also, KeyBox can manage, distribute, and disable public keys that have been setup within the application.</p>
+                been opened you can select a single terminal window or any combination to run your commands. Additional
+                system
+                administrators can be added and their terminal sessions and history audited. Also, KeyBox can manage,
+                distribute, and disable public keys that have been setup within the application.
+            </p>
+
+            <p class="lead">
+                KeyBox layers TLS/SSL on top of SSH and can act as a bastion host for administration. Layering protocols
+                for security is described in detail in <a
+                    href="http://www.sans.org/reading-room/whitepapers/vpns/security-implications-ssh-1180">The Security
+                Implications of SSH</a> whitepaper. SSH key management is enabled by default to prevent unmanaged public
+                keys and enforce best practices.
+            </p>
         </div>
         <div class="col-md-5">
             <img class="featurette-image img-responsive" data-src="img/500x300/terminals.png/500x300/auto"
@@ -282,7 +317,7 @@
                  src="img/500x300/select_terminal_windows.png" alt="Select Invidual Terminals"/></img>
         </div>
     </div>
-    
+
     <hr class="featurette-divider">
     <div class="row featurette">
         <div class="col-md-7">
@@ -291,40 +326,49 @@
             <h2 class="featurette-heading">Two-Factor Authentication. <span class="text-muted">Secure your users.</span>
             </h2>
 
-            <p class="lead">Supports Two-Factor via <a href="https://fedorahosted.org/freeotp" target="_blank">FreeOTP</a> or <a href="https://github.com/google/google-authenticator" target="_blank">Google Authenticator</a> on your Android or iOS device.</p>
+            <p class="lead">Supports Two-Factor via <a href="https://fedorahosted.org/freeotp"
+                                                       target="_blank">FreeOTP</a> or <a
+                    href="https://github.com/google/google-authenticator" target="_blank">Google Authenticator</a> on
+                your Android or iOS device.</p>
+
             <div class="panel panel-default">
-            <table class="table table-hover small">
-                <thead>
-                <tr class="info" >
-                    <th colspan="2">FreeOTP</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Android</td>
-                    <td><a href="https://play.google.com/store/apps/details?id=org.fedorahosted.freeotp" target="_blank">Google Play</a></td>
-                </tr>
-                <tr>
-                    <td>iOS</td>
-                    <td><a href="https://itunes.apple.com/us/app/freeotp/id872559395" target="_blank">iTunes</a></td>
-                </tr>
-                </tbody>
-                <thead>
-                <tr class="info">
-                    <th colspan="2" >Google Authenticator</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Android</td>
-                    <td><a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">Google Play</a></td>
-                </tr>
-                <tr>
-                    <td>iOS</td>
-                    <td><a href="https://itunes.apple.com/us/app/google-authenticator/id388497605" target="_blank">iTunes</a></td>
-                </tr>
-                </tbody>
-            </table>
+                <table class="table table-hover small">
+                    <thead>
+                    <tr class="info">
+                        <th colspan="2">FreeOTP</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Android</td>
+                        <td><a href="https://play.google.com/store/apps/details?id=org.fedorahosted.freeotp"
+                               target="_blank">Google Play</a></td>
+                    </tr>
+                    <tr>
+                        <td>iOS</td>
+                        <td><a href="https://itunes.apple.com/us/app/freeotp/id872559395" target="_blank">iTunes</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <thead>
+                    <tr class="info">
+                        <th colspan="2">Google Authenticator</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Android</td>
+                        <td>
+                            <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2"
+                               target="_blank">Google Play</a></td>
+                    </tr>
+                    <tr>
+                        <td>iOS</td>
+                        <td><a href="https://itunes.apple.com/us/app/google-authenticator/id388497605" target="_blank">iTunes</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
         </div>
@@ -333,7 +377,7 @@
                  src="img/500x300/two-factor.png" alt="Two-Factor Authentication"/></img>
         </div>
     </div>
-    
+
 
     <hr class="featurette-divider">
     <div class="row featurette">
@@ -344,7 +388,8 @@
             </h2>
 
             <p class="lead">Create users and assign system profiles. Users can login to KeyBox via the web-console,
-                but have limited privileges and can only access systems that have been assigned through their profile.</p>
+                but have limited privileges and can only access systems that have been assigned through their
+                profile.</p>
 
         </div>
         <div class="col-md-5" style="float:left;">
@@ -360,9 +405,10 @@
 
             <h2 class="featurette-heading">Manage, distribute, &amp; disable public SSH keys</h2>
 
-            <p class="lead">KeyBox works through the authorized_keys file on systems that are registered. Assign and
-                manage public SSH keys for users. Define keys and apply them to all systems or a system profile. 
-                Users with full-privileges may review and disable any administrative key forcing rotation.  </p>
+            <p class="lead">KeyBox works through the authorized_keys file on systems that are registered. Users can
+                generate an SSH key and distribute to any systems set in their profile. Strong passphrases are enforced
+                when keys are set to be generated through the application. Users with full-privileges may review and
+                disable any administrative key forcing rotation. </p>
 
         </div>
         <div class="col-md-5">
@@ -393,25 +439,38 @@
         <div class="col-md-5">
             <a name="why"></a>
 
-            <h2 class="featurette-heading">Why KeyBox?</h2>
+            <h2 class="featurette-heading">Why KeyBox</h2>
 
             <p class="lead">
-                Some of the ideas that I've been trying to explore with this project...
-
-
-            <ul>
-                    <li>Centralized user control<span class="text-muted"> - Grant access to systems through administrative profiles and user accounts.</span></li>
-                    <li>Auditable (experimental)<span class="text-muted"> - Audit the administrative activity on the systems. Prevents malicious users from deleting history or logs.
-</span></li>
-                    <li>Prevent SSH key sprawl and access mismanagement<span class="text-muted"> - Administrators set keys and distribute to systems through profiles. Any administrative key can be disabled which forces key rotation.</span></li>
-                    <li>Productivity<span class="text-muted"> - Instead of making the same changes on systems individually, share commands across systems.  Eliminates redundancy when patching or debugging issues.
-</span></li>
-                    <li>Portability<span class="text-muted"> - Run SSH through the browser without requiring client software or browser plugins. </span></li>
-                    <li>Layered Protocols<span class="text-muted"> - Protocols are stacked (TLS/SSL + SSH) so infrastructure cannot be exposed through tunneling / port forwarding.</span></li>
-                    <li>Infrastructure protection<span class="text-muted"> - A hardened version of KeyBox could act  as a bastion host allowing for centralized administration through SSH, proxying traffic into a DMZ or perimeter network. (see diagram) </span></li>
-
-        </ul>
+                Some of the ideas explored with this project...
             </p>
+
+            <ul class="list-group">
+                <li><strong>Centralized user control</strong> - Grant access to systems through administrative profiles
+                    and user accounts.
+                </li>
+                <li><strong>Auditable (experimental)</strong> - Audit the administrative activity on the systems.
+                    Prevents malicious users from deleting history or logs.
+                </li>
+                <li><strong>Prevent SSH key sprawl and access mismanagement</strong> - Administrators set keys and
+                    distribute to systems through profiles. Strong passphrases are enforced by default for SSH keys on
+                    registered systems. Also, any administrative key can be disabled forcing key rotation.
+                </li>
+                <li><strong>Productivity</strong> - Instead of making the same changes on systems individually, share
+                    commands across systems. Eliminates redundancy when patching or debugging issues.
+                    </span></li>
+                <li><strong>Portability</strong> - Run SSH through the browser without requiring client software or
+                    browser plugins.
+                </li>
+                <li><strong>Layered Protocols</strong> - Protocols are stacked (TLS/SSL + SSH) so infrastructure cannot
+                    be exposed through tunneling / port forwarding.
+                </li>
+                <li><strong>Infrastructure protection</strong> - A hardened version of KeyBox could act as a bastion
+                    host allowing for centralized administration through SSH, proxying traffic into a DMZ or perimeter
+                    network. (see diagram)
+                </li>
+
+            </ul>
 
         </div>
         <div class="col-md-7">
@@ -432,8 +491,8 @@
                 running on Amazon Web Services (AWS).</p>
 
             <p>
-                <a class="btn btn-default" href="javascript:window.open('https://github.com/skavanagh/EC2Box');"
-                  role="button">View on Github &raquo;</a></p>
+                <a class="btn btn-primary" href="javascript:window.open('https://github.com/skavanagh/EC2Box');"
+                   role="button">View on Github &raquo;</a></p>
 
         </div>
         <div class="col-md-5" style="float:right;">
@@ -450,19 +509,21 @@
 
             <h2 class="featurette-heading">KeyBox-OpenShift</h2>
 
-            <p class="lead">A web-based SSH console for OpenShift. Connect and share terminal commands on multiple gears simultaneously.</p>
+            <p class="lead">A web-based SSH console for OpenShift. Connect and share terminal commands on multiple gears
+                simultaneously.</p>
 
             <p>
-                <a class="btn btn-default" href="javascript:window.open('https://github.com/skavanagh/KeyBox-OpenShift');"
+                <a class="btn btn-primary"
+                   href="javascript:window.open('https://github.com/skavanagh/KeyBox-OpenShift');"
                    role="button">View on Github &raquo;</a></p>
 
         </div>
-        <div class="col-md-5" >
+        <div class="col-md-5">
             <img class="featurette-image img-responsive" data-src="img/500x300/keybox-openshift.png/500x300/auto"
-                 src="img/500x300/keybox-openshift.png" alt="KeyBox-OpenShift: Web-based SSH console for OpenShfit"/></img>
+                 src="img/500x300/keybox-openshift.png"
+                 alt="KeyBox-OpenShift: Web-based SSH console for OpenShfit"/></img>
         </div>
     </div>
-
 
 
     <hr class="featurette-divider">
@@ -519,10 +580,13 @@
     _gaq.push(['_setAccount', 'UA-38369800-1']);
     _gaq.push(['_trackPageview']);
 
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
     })();
 
 </script>
