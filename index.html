@@ -287,11 +287,12 @@
             </p>
 
             <p class="lead">
-                KeyBox layers TLS/SSL on top of SSH and can act as a bastion host for administration. Layering protocols
-                for security is described in detail in <a
-                    href="http://www.sans.org/reading-room/whitepapers/vpns/security-implications-ssh-1180">The Security
-                Implications of SSH</a> whitepaper. SSH key management is enabled by default to prevent unmanaged public
-                keys and enforce best practices.
+                KeyBox layers TLS/SSL on top of SSH and acts as a bastion host for administration. Protocols are stacked 
+                (TLS/SSL + SSH) so infrastructure cannot be exposed through tunneling / port forwarding. More details 
+                can be found in the following whitepaper: <a 
+                href="http://www.sans.org/reading-room/whitepapers/vpns/security-implications-ssh-1180">The Security 
+                Implications of SSH</a>. Also, SSH key management is enabled by default to prevent unmanaged public keys 
+                and enforce best practices.
             </p>
         </div>
         <div class="col-md-5">
