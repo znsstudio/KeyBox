@@ -20,12 +20,17 @@ import com.keybox.manage.model.User;
 import com.keybox.manage.util.DBUtils;
 import com.keybox.manage.util.EncryptionUtil;
 import com.keybox.manage.util.ExternalAuthUtil;
+import com.keybox.manage.util.OpenStackUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.UUID;
+
+import org.openstack4j.api.OSClient;
+import org.openstack4j.model.common.Identifier;
+import org.openstack4j.openstack.OSFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,9 +48,8 @@ public class AuthDB {
      * @return auth token if success
      */
     public static String login(Auth auth) {
-        //check ldap first
+        //check ldap/openstack first
         String authToken = ExternalAuthUtil.login(auth);
-        
         if (StringUtils.isEmpty(authToken)) {
 
             Connection con = null;

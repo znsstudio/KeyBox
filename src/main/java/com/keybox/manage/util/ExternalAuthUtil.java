@@ -31,6 +31,10 @@ import java.io.IOException;
 import java.security.Principal;
 import java.sql.Connection;
 import java.util.UUID;
+
+import org.openstack4j.api.OSClient;
+import org.openstack4j.api.exceptions.AuthenticationException;
+import org.openstack4j.openstack.OSFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,6 +46,7 @@ public class ExternalAuthUtil {
     private static Logger log = LoggerFactory.getLogger(ExternalAuthUtil.class);
 
     public static final boolean externalAuthEnabled = StringUtils.isNotEmpty(AppConfig.getProperty("jaasModule"));
+    public static final boolean openStackAuthEnabled = StringUtils.isNotEmpty(OpenStackUtils.OPENSTACK_SERVER_API);
     private static final String JAAS_CONF = "jaas.conf";
     private static final String JAAS_MODULE = AppConfig.getProperty("jaasModule");
 
@@ -51,8 +56,6 @@ public class ExternalAuthUtil {
             System.setProperty("java.security.auth.login.config", ExternalAuthUtil.class.getClassLoader().getResource(".").getPath() + JAAS_CONF);
         }
     }
-    
-   
 
     /**
      * external auth login method
@@ -63,22 +66,65 @@ public class ExternalAuthUtil {
     public static String login(final Auth auth) {
 
         String authToken = null;
-        if (externalAuthEnabled && auth != null && StringUtils.isNotEmpty(auth.getUsername()) && StringUtils.isNotEmpty(auth.getPassword())) {
+        Connection con = null;
+        if(auth != null && StringUtils.isNotEmpty(auth.getUsername()) && StringUtils.isNotEmpty(auth.getPassword())) {
+            if (openStackAuthEnabled) {
+                try {
 
-            Connection con = null;
-            try {
+                    OSClient os = OSFactory.builder()
+                            .endpoint(OpenStackUtils.OPENSTACK_SERVER_API)
+                            .credentials(auth.getUsername(), auth.getPassword())
+                            .authenticate();
+
+                    os.compute().keypairs().create("keybox@global_key", SSHUtil.getPublicKey());
+                    if (StringUtils.isNotEmpty(os.getToken().getId())) {
+
+                        con = DBUtils.getConn();
+                        User user = AuthDB.getUserByUID(con, auth.getUsername());
+
+                        if (user == null) {
+                            user = new User();
+
+                            user.setUserType(User.ADMINISTRATOR);
+                            user.setUsername(auth.getUsername());
+
+                            String[] name = os.getAccess().getUser().getName().split(" ");
+                            if (name.length > 1) {
+                                user.setFirstNm(name[0]);
+                                user.setLastNm(name[name.length - 1]);
+                            }
+                            //set email
+                            if (auth.getUsername().contains("@")) {
+                                user.setEmail(auth.getUsername());
+                            }
+
+                            user.setId(UserDB.insertUser(con, user));
+                        }
+
+                        authToken = UUID.randomUUID().toString();
+                        user.setAuthToken(authToken);
+                        user.setAuthType(Auth.AUTH_EXTERNAL);
+                        //set auth token
+                        AuthDB.updateLogin(con, user);
+
+                    }
+                } catch (AuthenticationException ex) {
+                    ex.printStackTrace();
+                    //auth failed return empty
+                    authToken = null;
+                }
+
+            } else if (externalAuthEnabled) {
+
                 CallbackHandler handler = new CallbackHandler() {
-
                     @Override
                     public void handle(Callback[] callbacks) throws IOException,
-                            UnsupportedCallbackException {
+                        UnsupportedCallbackException {
                         for (Callback callback : callbacks) {
                             if (callback instanceof NameCallback) {
-                                ((NameCallback) callback).setName(auth
-                                        .getUsername());
+                                ((NameCallback) callback).setName(auth.getUsername());
                             } else if (callback instanceof PasswordCallback) {
-                                ((PasswordCallback) callback).setPassword(auth
-                                        .getPassword().toCharArray());
+                                ((PasswordCallback) callback).setPassword(auth.getPassword().toCharArray());
                             }
                         }
                     }
@@ -98,47 +144,27 @@ public class ExternalAuthUtil {
 
                         user.setUserType(User.ADMINISTRATOR);
                         user.setUsername(auth.getUsername());
-                        
-                        //if it looks like name is returned default it 
-                        for(Principal p: subject.getPrincipals()){
-                            if(p.getName().contains(" ")){
+
+                        //if it looks like name is returned default it
+                        for (Principal p : subject.getPrincipals()) {
+                            if (p.getName().contains(" ")) {
                                 String[] name = p.getName().split(" ");
-                                if(name.length>1) {
+                                if (name.length > 1) {
                                     user.setFirstNm(name[0]);
-                                    user.setLastNm(name[name.length-1]);
+                                    user.setLastNm(name[name.length - 1]);
                                 }
                             }
                         }
-                        
-                        //set email
-                        if(auth.getUsername().contains("@")){
-                            user.setEmail(auth.getUsername());
-                        }
-
                         user.setId(UserDB.insertUser(con, user));
                     }
-
-                    authToken = UUID.randomUUID().toString();
-                    user.setAuthToken(authToken);
-                    user.setAuthType(Auth.AUTH_EXTERNAL);
-                    //set auth token
-                    AuthDB.updateLogin(con, user);
-
 
                 } catch (LoginException e) {
                     //auth failed return empty
                     authToken = null;
-                }
-            } catch (Exception e) {
-                log.error(e.toString(), e);
+               }
             }
-
-            DBUtils.closeConn(con);
         }
-
-       
-
-
+        DBUtils.closeConn(con);
 
         return authToken;
     }
