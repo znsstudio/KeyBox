@@ -26,6 +26,8 @@ public class Auth {
     
     public static final String AUTH_BASIC="BASIC";
     public static final String AUTH_EXTERNAL="EXTERNAL";
+    public static final String AUTH_OPENSTACK="OPENSTACK";
+
 
     Long id;
     String username;

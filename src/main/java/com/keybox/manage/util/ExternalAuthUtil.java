@@ -17,6 +17,7 @@ package com.keybox.manage.util;
 
 
 import com.keybox.common.util.AppConfig;
+import com.keybox.common.util.AuthUtil;
 import com.keybox.manage.db.AuthDB;
 import com.keybox.manage.db.UserDB;
 import com.keybox.manage.model.Auth;
@@ -27,13 +28,14 @@ import javax.security.auth.Subject;
 import javax.security.auth.callback.*;
 import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.Connection;
 import java.util.UUID;
 
 import org.openstack4j.api.OSClient;
-import org.openstack4j.api.exceptions.AuthenticationException;
+import org.openstack4j.model.common.Identifier;
 import org.openstack4j.openstack.OSFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,13 +65,13 @@ public class ExternalAuthUtil {
      * @param auth contains username and password
      * @return auth token if success
      */
-    public static String login(final Auth auth) {
+    public static String login(HttpServletRequest request, final Auth auth) {
         String authToken = null;
 
         if(auth != null && StringUtils.isNotEmpty(auth.getUsername()) && StringUtils.isNotEmpty(auth.getPassword())) {
 
             if (openStackAuthEnabled) {
-                authToken = loginOpenStack(auth);
+                authToken = loginOpenStack(request, auth);
             }
             if (authToken == null && externalAuthEnabled) {
                 authToken = loginExternal(auth);
@@ -79,18 +81,17 @@ public class ExternalAuthUtil {
         return authToken;
     }
 
-    private static String loginOpenStack(final Auth auth) {
+    private static String loginOpenStack(HttpServletRequest request, final Auth auth) {
 
         Connection con = null;
         String authToken =  null;
         try {
 
-            OSClient os = OSFactory.builder()
+            OSClient os = OSFactory.builderV3()
                     .endpoint(OpenStackUtils.OPENSTACK_SERVER_API)
-                    .credentials(auth.getUsername(), auth.getPassword())
+                    .credentials(auth.getUsername(), auth.getPassword(), Identifier.byName(OpenStackUtils.OPENSTACK_DOMAIN_NM))
                     .authenticate();
 
-            os.compute().keypairs().create("keybox@global_key", SSHUtil.getPublicKey());
             if (StringUtils.isNotEmpty(os.getToken().getId())) {
 
                 con = DBUtils.getConn();
@@ -99,15 +100,15 @@ public class ExternalAuthUtil {
                 if (user == null) {
                     user = new User();
 
-                    user.setUserType(User.ADMINISTRATOR);
+                    user.setUserType(User.MANAGER);
                     user.setUsername(auth.getUsername());
 
                     String[] name = os.getAccess().getUser().getName().split(" ");
                     if (name.length > 1) {
                         user.setFirstNm(name[0]);
                         user.setLastNm(name[name.length - 1]);
-                    }
-                    //set email
+
+                    } //set email
                     if (auth.getUsername().contains("@")) {
                         user.setEmail(auth.getUsername());
                     }
@@ -115,15 +116,15 @@ public class ExternalAuthUtil {
                     user.setId(UserDB.insertUser(con, user));
                 }
 
+                AuthUtil.setOpenStackAccess(request.getSession(), os.getAccess());
                 authToken = UUID.randomUUID().toString();
                 user.setAuthToken(authToken);
-                user.setAuthType(Auth.AUTH_EXTERNAL);
+                user.setAuthType(Auth.AUTH_OPENSTACK);
                 //set auth token
                 AuthDB.updateLogin(con, user);
-
             }
-        } catch (AuthenticationException ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            log.info(e.toString(), e);
             //auth failed return empty
             authToken = null;
         }
@@ -186,6 +187,7 @@ public class ExternalAuthUtil {
             AuthDB.updateLogin(con, user);
 
         } catch (LoginException e) {
+            log.info(e.toString(), e);
             //auth failed return empty
             authToken = null;
         }

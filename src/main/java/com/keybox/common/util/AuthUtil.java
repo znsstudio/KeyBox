@@ -16,7 +16,8 @@
 package com.keybox.common.util;
 
 import com.keybox.manage.util.EncryptionUtil;
-import javax.servlet.http.HttpServletRequest;
+import org.openstack4j.model.identity.Access;
+
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -61,7 +62,7 @@ public class AuthUtil {
         String authType= (String)session.getAttribute("authType");
         return authType;
     }
-    
+
     /**
      * set user type
      *
@@ -140,6 +141,16 @@ public class AuthUtil {
     }
 
     /**
+     * query session for openstack access object
+     *
+     * @param session http session
+     * @return openstack access object
+     */
+    public static Access getOpenStackAccess( HttpSession session) {
+        Access access = (Access) session.getAttribute("openStackAccess");
+        return access;
+    }
+    /**
      * query session for timeout
      *
      * @param session http session
@@ -188,6 +199,18 @@ public class AuthUtil {
     }
 
     /**
+     * set session openstack token
+     *
+     * @param session http session
+     * @param access openstack access object
+     */
+    public static void setOpenStackAccess(HttpSession session, Access access) {
+        if (access != null) {
+            session.setAttribute("openStackAccess", access);
+        }
+    }
+
+    /**
      * set session timeout
      *
      * @param session http session
@@ -211,6 +234,7 @@ public class AuthUtil {
         session.setAttribute("authToken", null);
         session.setAttribute("userId", null);
         session.setAttribute("sessionId",null);
+        session.setAttribute("openStackAccess",null);
 
         session.invalidate();
     }

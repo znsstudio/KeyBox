@@ -20,7 +20,6 @@ import com.keybox.manage.model.User;
 import com.keybox.manage.util.DBUtils;
 import com.keybox.manage.util.EncryptionUtil;
 import com.keybox.manage.util.ExternalAuthUtil;
-import com.keybox.manage.util.OpenStackUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Connection;
@@ -28,11 +27,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.UUID;
 
-import org.openstack4j.api.OSClient;
-import org.openstack4j.model.common.Identifier;
-import org.openstack4j.openstack.OSFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * DAO to login administrative users
@@ -48,46 +46,40 @@ public class AuthDB {
      * @return auth token if success
      */
     public static String login(Auth auth) {
-        //check ldap/openstack first
-        String authToken = ExternalAuthUtil.login(auth);
-        if (StringUtils.isEmpty(authToken)) {
 
-            Connection con = null;
+        String authToken = null;
 
-            try {
-                con = DBUtils.getConn();
+        Connection con = null;
 
+        try {
+            con = DBUtils.getConn();
 
-                //get salt for user
-                String salt = getSaltByUsername(con, auth.getUsername());
-                //login
-                PreparedStatement stmt = con.prepareStatement("select * from users where enabled=true and username=? and password=?");
-                stmt.setString(1, auth.getUsername());
-                stmt.setString(2, EncryptionUtil.hash(auth.getPassword() + salt));
-                ResultSet rs = stmt.executeQuery();
+            //get salt for user
+            String salt = getSaltByUsername(con, auth.getUsername());
+            //login
+            PreparedStatement stmt = con.prepareStatement("select * from users where enabled=true and username=? and password=?");
+            stmt.setString(1, auth.getUsername());
+            stmt.setString(2, EncryptionUtil.hash(auth.getPassword() + salt));
+            ResultSet rs = stmt.executeQuery();
 
-                if (rs.next()) {
-
-                    auth.setId(rs.getLong("id"));
-                    authToken = UUID.randomUUID().toString();
-                    auth.setAuthToken(authToken);
-                    auth.setAuthType(Auth.AUTH_BASIC);
-                    updateLogin(con, auth);
-
-                }
-                DBUtils.closeRs(rs);
-                DBUtils.closeStmt(stmt);
-
-
-            } catch (Exception e) {
-                log.error(e.toString(), e);
+            if (rs.next()) {
+                auth.setId(rs.getLong("id"));
+                authToken = UUID.randomUUID().toString();
+                auth.setAuthToken(authToken);
+                auth.setAuthType(Auth.AUTH_BASIC);
+                updateLogin(con, auth);
             }
+            DBUtils.closeRs(rs);
+            DBUtils.closeStmt(stmt);
 
-            DBUtils.closeConn(con);
+
+        } catch (Exception e) {
+            log.error(e.toString(), e);
         }
 
-        return authToken;
+        DBUtils.closeConn(con);
 
+        return authToken;
     }
 
 

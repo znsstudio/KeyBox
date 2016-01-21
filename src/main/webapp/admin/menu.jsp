@@ -35,10 +35,6 @@
         });
     </script>
 
-
-
-
-
 </head>
 
 
@@ -73,6 +69,17 @@
                 </td>
 
             </tr>
+            <s:if test="%{@com.keybox.manage.util.ExternalAuthUtil@openStackAuthEnabled}">
+                <tr>
+                    <td>
+                        <a  href="../manage/createVM.action">Manage VMs</a>
+
+                    </td>
+                    <td>
+                        Manage OpenStack Virtual Machines
+                    </td>
+                </tr>
+            </s:if>
             <tr>
                <td>
                     <a href="../manage/viewProfiles.action">Profiles</a>

@@ -20,6 +20,7 @@ import com.keybox.common.util.AuthUtil;
 import com.keybox.manage.db.AuthDB;
 import com.keybox.manage.model.Auth;
 import com.keybox.manage.model.User;
+import com.keybox.manage.util.ExternalAuthUtil;
 import com.keybox.manage.util.OTPUtil;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.lang3.StringUtils;
@@ -80,7 +81,11 @@ public class LoginAction extends ActionSupport implements ServletRequestAware, S
     public String loginSubmit() {
         String retVal = SUCCESS;
 
-        String authToken = AuthDB.login(auth);
+        //check ldap/openstack first
+        String authToken = ExternalAuthUtil.login(servletRequest, auth);
+        if (StringUtils.isEmpty(authToken)) {
+            authToken = AuthDB.login(auth);
+        }
 
         //get client IP
         String clientIP = null;
