@@ -21,5 +21,6 @@ public class OpenStackUtils {
 
     public static final String OPENSTACK_SERVER_API = AppConfig.getProperty("openStackServerAPI");
     public static final String OPENSTACK_DOMAIN_NM = AppConfig.getProperty("openStackDomainName");
+    public static final String OPENSTACK_PROJECT_ID= AppConfig.getProperty("openStackProjectID");
 
 }

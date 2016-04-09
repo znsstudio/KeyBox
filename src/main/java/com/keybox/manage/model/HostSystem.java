@@ -33,6 +33,7 @@ public class HostSystem {
     String errorMsg;
     List<String> publicKeyList;
     Integer instanceId;
+    String openstackId;
 
     public static final String INITIAL_STATUS="INITIAL";
     public static final String AUTH_FAIL_STATUS="AUTHFAIL";
@@ -137,5 +138,13 @@ public class HostSystem {
 
     public void setInstanceId(Integer instanceId) {
         this.instanceId = instanceId;
+    }
+
+    public String getOpenstackId() {
+        return openstackId;
+    }
+
+    public void setOpenstackId(String openstackId) {
+        this.openstackId = openstackId;
     }
 }

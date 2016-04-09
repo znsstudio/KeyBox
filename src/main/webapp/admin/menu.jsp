@@ -72,7 +72,7 @@
             <s:if test="%{@com.keybox.manage.util.ExternalAuthUtil@openStackAuthEnabled}">
                 <tr>
                     <td>
-                        <a  href="../manage/createVM.action">Manage VMs</a>
+                        <a  href="../manage/viewOpenstackVMs.action">OpenStack VMs</a>
 
                     </td>
                     <td>

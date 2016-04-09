@@ -15,6 +15,7 @@
  */
 package com.keybox.manage.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OpenStackVM {
@@ -23,7 +24,7 @@ public class OpenStackVM {
 	String flavor;
 	String profile;
 	String securityGroup;
-	List<String> network;
+	String network;
 
 	public String getName() {
 		return name;
@@ -65,11 +66,11 @@ public class OpenStackVM {
 		this.securityGroup = securityGroup;
 	}
 
-	public List<String> getNetwork() {
+	public String getNetwork() {
 		return network;
 	}
 
-	public void setNetwork(List<String> network) {
+	public void setNetwork(String network) {
 		this.network = network;
 	}
 }

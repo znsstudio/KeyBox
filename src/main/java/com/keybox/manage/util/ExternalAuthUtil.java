@@ -90,6 +90,7 @@ public class ExternalAuthUtil {
             OSClient os = OSFactory.builderV3()
                     .endpoint(OpenStackUtils.OPENSTACK_SERVER_API)
                     .credentials(auth.getUsername(), auth.getPassword(), Identifier.byName(OpenStackUtils.OPENSTACK_DOMAIN_NM))
+                    .scopeToProject(Identifier.byId(OpenStackUtils.OPENSTACK_PROJECT_ID), Identifier.byName(OpenStackUtils.OPENSTACK_DOMAIN_NM))
                     .authenticate();
 
             if (StringUtils.isNotEmpty(os.getToken().getId())) {

@@ -69,12 +69,12 @@
         <dependency>
             <groupId>org.pacesys</groupId>
             <artifactId>openstack4j-core</artifactId>
-            <version>2.10</version>
+            <version>2.11</version>
         </dependency>
         <dependency>
             <groupId>org.pacesys.openstack4j.connectors</groupId>
             <artifactId>openstack4j-httpclient</artifactId>
-            <version>2.10</version>
+            <version>2.11</version>
         </dependency>
 
         <!-- provided dependencies-->

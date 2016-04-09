@@ -56,7 +56,7 @@ public class SystemDB {
 
 		String orderBy = "";
 		if (sortedSet.getOrderByField() != null && !sortedSet.getOrderByField().trim().equals("")) {
-			orderBy = "order by " + sortedSet.getOrderByField() + " " + sortedSet.getOrderByDirection();
+			orderBy = " order by " + sortedSet.getOrderByField() + " " + sortedSet.getOrderByDirection();
 		}
 		String sql = "select * from system where id in (select distinct system_id from  system_map m, user_map um where m.profile_id=um.profile_id and um.user_id=? ";
 		//if profile id exists add to statement
@@ -85,6 +85,7 @@ public class SystemDB {
 				hostSystem.setPort(rs.getInt("port"));
 				hostSystem.setAuthorizedKeys(rs.getString("authorized_keys"));
 				hostSystem.setStatusCd(rs.getString("status_cd"));
+				hostSystem.setOpenstackId(rs.getString("openstack_id"));
 				hostSystemList.add(hostSystem);
 			}
 			DBUtils.closeRs(rs);
@@ -101,7 +102,6 @@ public class SystemDB {
 
 	}
 
-
 	/**
 	 * method to do order by based on the sorted set object for systems
 	 *
@@ -109,15 +109,29 @@ public class SystemDB {
 	 * @return sortedSet with list of host systems
 	 */
 	public static SortedSet getSystemSet(SortedSet sortedSet) {
+		return getSystemSet(sortedSet, null);
+	}
+
+	/**
+	 * method to do order by based on the sorted set object for systems
+	 *
+	 * @param sortedSet sorted set object
+	 * @param showOpenstack boolean to only show openstack
+	 * @return sortedSet with list of host systems
+	 */
+	public static SortedSet getSystemSet(SortedSet sortedSet, Boolean showOpenstack) {
 		List<HostSystem> hostSystemList = new ArrayList<HostSystem>();
 
 		String orderBy = "";
 		if (sortedSet.getOrderByField() != null && !sortedSet.getOrderByField().trim().equals("")) {
-			orderBy = "order by " + sortedSet.getOrderByField() + " " + sortedSet.getOrderByDirection();
+			orderBy = " order by " + sortedSet.getOrderByField() + " " + sortedSet.getOrderByDirection();
 		}
 		String sql = "select * from  system s ";
 		//if profile id exists add to statement
-		sql += StringUtils.isNotEmpty(sortedSet.getFilterMap().get(FILTER_BY_PROFILE_ID)) ? ",system_map m where s.id=m.system_id and m.profile_id=?" : "";
+		sql += StringUtils.isNotEmpty(sortedSet.getFilterMap().get(FILTER_BY_PROFILE_ID)) ? ",system_map m where s.id=m.system_id and m.profile_id=? and " : " where 1=1 ";
+		if(showOpenstack!=null) {
+			sql += showOpenstack ? " and openstack_id is not null" : " and openstack_id is null";
+		}
 		sql += orderBy;
 
 		Connection con = null;
@@ -138,6 +152,7 @@ public class SystemDB {
 				hostSystem.setPort(rs.getInt("port"));
 				hostSystem.setAuthorizedKeys(rs.getString("authorized_keys"));
 				hostSystem.setStatusCd(rs.getString("status_cd"));
+				hostSystem.setOpenstackId(rs.getString("openstack_id"));
 				hostSystemList.add(hostSystem);
 			}
 			DBUtils.closeRs(rs);
@@ -170,7 +185,7 @@ public class SystemDB {
 		try {
 			con = DBUtils.getConn();
 
-			getSystem(con, id);
+			hostSystem = getSystem(con, id);
 
 
 		} catch (Exception e) {
@@ -210,6 +225,7 @@ public class SystemDB {
 				hostSystem.setPort(rs.getInt("port"));
 				hostSystem.setAuthorizedKeys(rs.getString("authorized_keys"));
 				hostSystem.setStatusCd(rs.getString("status_cd"));
+				hostSystem.setOpenstackId(rs.getString("openstack_id"));
 			}
 			DBUtils.closeRs(rs);
 			DBUtils.closeStmt(stmt);
@@ -226,38 +242,83 @@ public class SystemDB {
 	/**
 	 * inserts host system into DB
 	 *
+	 * @param con DB connection
 	 * @param hostSystem host system object
 	 * @return user id
 	 */
-	public static Long insertSystem(HostSystem hostSystem) {
+	public static Long insertSystem(Connection con, HostSystem hostSystem) {
 
-
-		Connection con = null;
-
-		Long userId = null;
+		Long systemId = null;
 		try {
-			con = DBUtils.getConn();
-			PreparedStatement stmt = con.prepareStatement("insert into system (display_nm, user, host, port, authorized_keys, status_cd) values (?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement stmt = con.prepareStatement("insert into system (display_nm, user, host, port, authorized_keys, status_cd, openstack_id) values (?,?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, hostSystem.getDisplayNm());
 			stmt.setString(2, hostSystem.getUser());
 			stmt.setString(3, hostSystem.getHost());
 			stmt.setInt(4, hostSystem.getPort());
 			stmt.setString(5, hostSystem.getAuthorizedKeys());
 			stmt.setString(6, hostSystem.getStatusCd());
+			stmt.setString(7, hostSystem.getOpenstackId());
 			stmt.execute();
 
 			ResultSet rs = stmt.getGeneratedKeys();
 			if (rs.next()) {
-				userId = rs.getLong(1);
+				systemId = rs.getLong(1);
 			}
 			DBUtils.closeStmt(stmt);
 
 		} catch (Exception e) {
 			log.error(e.toString(), e);
 		}
-		DBUtils.closeConn(con);
-		return userId;
+		return systemId;
 
+	}
+
+	/**
+	 * inserts host system into DB
+	 *
+	 * @param hostSystem host system object
+	 * @return user id
+	 */
+	public static Long insertSystem(HostSystem hostSystem) {
+
+		Connection con = null;
+		Long systemId = null;
+		try {
+			con = DBUtils.getConn();
+			systemId = insertSystem(con, hostSystem);
+		} catch (Exception e) {
+			log.error(e.toString(), e);
+		}
+
+		DBUtils.closeConn(con);
+
+		return systemId;
+	}
+
+	/**
+	 * updates host system record
+	 *
+	 * @param con DB connection
+	 * @param hostSystem host system object
+	 */
+	public static void updateSystem(Connection con, HostSystem hostSystem) {
+
+		try {
+			PreparedStatement stmt = con.prepareStatement("update system set display_nm=?, user=?, host=?, port=?, authorized_keys=?, status_cd=?, openstack_id=?  where id=?");
+			stmt.setString(1, hostSystem.getDisplayNm());
+			stmt.setString(2, hostSystem.getUser());
+			stmt.setString(3, hostSystem.getHost());
+			stmt.setInt(4, hostSystem.getPort());
+			stmt.setString(5, hostSystem.getAuthorizedKeys());
+			stmt.setString(6, hostSystem.getStatusCd());
+			stmt.setString(7, hostSystem.getOpenstackId());
+			stmt.setLong(8, hostSystem.getId());
+			stmt.execute();
+			DBUtils.closeStmt(stmt);
+
+		} catch (Exception e) {
+			log.error(e.toString(), e);
+		}
 	}
 
 	/**
@@ -267,28 +328,16 @@ public class SystemDB {
 	 */
 	public static void updateSystem(HostSystem hostSystem) {
 
-
 		Connection con = null;
 
 		try {
 			con = DBUtils.getConn();
-
-			PreparedStatement stmt = con.prepareStatement("update system set display_nm=?, user=?, host=?, port=?, authorized_keys=?, status_cd=?  where id=?");
-			stmt.setString(1, hostSystem.getDisplayNm());
-			stmt.setString(2, hostSystem.getUser());
-			stmt.setString(3, hostSystem.getHost());
-			stmt.setInt(4, hostSystem.getPort());
-			stmt.setString(5, hostSystem.getAuthorizedKeys());
-			stmt.setString(6, hostSystem.getStatusCd());
-			stmt.setLong(7, hostSystem.getId());
-			stmt.execute();
-			DBUtils.closeStmt(stmt);
+			updateSystem(con, hostSystem);
 
 		} catch (Exception e) {
 			log.error(e.toString(), e);
 		}
 		DBUtils.closeConn(con);
-
 	}
 
 	/**
@@ -324,7 +373,6 @@ public class SystemDB {
 	 */
 	public static List<HostSystem> getSystems(List<Long> systemIdList) {
 
-
 		Connection con = null;
 		List<HostSystem> hostSystemListReturn = new ArrayList<HostSystem>();
 
@@ -345,8 +393,67 @@ public class SystemDB {
 
 	}
 
+	/**
+	 * returns system by OpenStack id
+	 *
+	 * @param openstackId openstack id
+	 * @return system
+	 */
+	public static HostSystem getOpenStackSystem(String openstackId) {
+
+		HostSystem hostSystem = null;
+		Connection con = null;
+		try {
+			con = DBUtils.getConn();
+			hostSystem = getOpenStackSystem(con, openstackId);
+		} catch (Exception e) {
+			log.error(e.toString(), e);
+		}
+		DBUtils.closeConn(con);
 
 
+		return hostSystem;
+	}
+
+
+	/**
+	 * returns system by OpenStack id
+	 *
+	 * @param con DB connection
+	 * @param openstackId openstack id
+	 * @return system
+	 */
+	public static HostSystem getOpenStackSystem(Connection con, String openstackId) {
+
+		HostSystem hostSystem = null;
+
+		try {
+
+			PreparedStatement stmt = con.prepareStatement("select * from  system where openstack_id=?");
+			stmt.setString(1, openstackId);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				hostSystem = new HostSystem();
+				hostSystem.setId(rs.getLong("id"));
+				hostSystem.setDisplayNm(rs.getString("display_nm"));
+				hostSystem.setUser(rs.getString("user"));
+				hostSystem.setHost(rs.getString("host"));
+				hostSystem.setPort(rs.getInt("port"));
+				hostSystem.setAuthorizedKeys(rs.getString("authorized_keys"));
+				hostSystem.setStatusCd(rs.getString("status_cd"));
+				hostSystem.setOpenstackId(rs.getString("openstack_id"));
+			}
+			DBUtils.closeRs(rs);
+			DBUtils.closeStmt(stmt);
+
+		} catch (Exception e) {
+			log.error(e.toString(), e);
+		}
+
+
+		return hostSystem;
+	}
 	/**
 	 * returns all systems
 	 *
@@ -372,6 +479,7 @@ public class SystemDB {
 				hostSystem.setPort(rs.getInt("port"));
 				hostSystem.setAuthorizedKeys(rs.getString("authorized_keys"));
 				hostSystem.setStatusCd(rs.getString("status_cd"));
+				hostSystem.setOpenstackId(rs.getString("openstack_id"));
 				hostSystemList.add(hostSystem);
 			}
 			DBUtils.closeRs(rs);
@@ -428,8 +536,6 @@ public class SystemDB {
 	public static List<Long> getAllSystemIdsForUser(Connection con, Long userId) {
 
 		List<Long> systemIdList = new ArrayList<Long>();
-
-
 		try {
 			PreparedStatement stmt = con.prepareStatement("select distinct system_id from  system_map m, user_map um where m.profile_id=um.profile_id and um.user_id=?");
 			stmt.setLong(1, userId);
@@ -511,5 +617,39 @@ public class SystemDB {
 		return systemIdList;
 
 	}
+
+	/**
+	 * saves a set of VMs obtained from OpenStack
+	 *
+	 * @param hostSystemList
+	 */
+	public static void saveOpenStackVms(List<HostSystem> hostSystemList) {
+		Connection con = null;
+		try {
+			con = DBUtils.getConn();
+			for (HostSystem hostSystem : hostSystemList) {
+				HostSystem prevSystem = getOpenStackSystem(con, hostSystem.getOpenstackId());
+				if(prevSystem != null) {
+					//use previous systems settings
+					hostSystem.setId(prevSystem.getId());
+					hostSystem.setUser(prevSystem.getUser());
+					hostSystem.setPort(prevSystem.getPort());
+					hostSystem.setAuthorizedKeys(prevSystem.getAuthorizedKeys());
+					hostSystem.setStatusCd(prevSystem.getStatusCd());
+					hostSystem.setHost(prevSystem.getHost());
+					updateSystem(con, hostSystem);
+				} else {
+					insertSystem(con, hostSystem);
+				}
+			}
+
+		} catch (Exception ex) {
+			log.error(ex.toString(), ex);
+		}
+		DBUtils.closeConn(con);
+
+	}
+
+
 
 }

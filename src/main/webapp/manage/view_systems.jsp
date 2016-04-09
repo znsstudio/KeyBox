@@ -217,6 +217,7 @@
                                     <s:textfield name="hostSystem.authorizedKeys" value="%{authorizedKeys}"
                                                  label="Authorized Keys" size="30"/>
                                     <s:hidden name="hostSystem.id" value="%{id}"/>
+                                    <s:hidden name="hostSystem.openstackId" value="%{openstackId}"/>
                                     <s:hidden name="sortedSet.orderByDirection"/>
                                     <s:hidden name="sortedSet.orderByField"/>
                                 </s:form>
@@ -250,6 +251,7 @@
                                 <s:hidden name="hostSystem.host"/>
                                 <s:hidden name="hostSystem.port"/>
                                 <s:hidden name="hostSystem.authorizedKeys"/>
+                                <s:hidden name="hostSystem.openstackId"/>
                                 <s:hidden name="sortedSet.orderByDirection"/>
                                 <s:hidden name="sortedSet.orderByField"/>
                                 <s:password name="password" label="Password" size="15" value="" autocomplete="off"/>
@@ -284,6 +286,7 @@
                                 <s:hidden name="hostSystem.host"/>
                                 <s:hidden name="hostSystem.port"/>
                                 <s:hidden name="hostSystem.authorizedKeys"/>
+                                <s:hidden name="hostSystem.openstackId"/>
                                 <s:hidden name="sortedSet.orderByDirection"/>
                                 <s:hidden name="sortedSet.orderByField"/>
                                 <s:password name="passphrase" label="Passphrase" size="15" value="" autocomplete="off"/>
