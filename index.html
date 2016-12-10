@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
-          content="KeyBox is an open-source web-based SSH console that centrally manages administrative access to systems. Web-based administration is combined with management and distribution of user's public SSH keys. Key management and administration is based on profiles assigned to defined users."/>
+          content="KeyBox is an open-source web-based SSH console that centrally manages administrative access to systems. It acts as a bastion host for administrators with features that promote infrastructure security. Web-based administration is combined with management and distribution of user's public SSH keys. Key management and administration is based on profiles assigned to defined users."/>
     <meta name="keywords"
-          content="Web-based, ssh, multi-terminal, terminal, bastion host, ssh-keygen, public keys, management, key management, open source"/>
+          content="ssh key management, Web-based, ssh, multi-terminal, terminal, bastion host, ssh-keygen, public keys, management, key management, open source"/>
     <meta name="author" content="Sean Kavanagh">
     <link rel="shortcut icon" href="img/keybox.ico">
 
@@ -211,7 +211,8 @@
             <h2>KeyBox</h2>
 
 
-            <p>KeyBox is an open-source web-based SSH console that centrally manages administrative access to systems. </p>
+            <p>KeyBox is an open-source web-based SSH console that centrally manages administrative access to systems.</p>
+            <p>It acts as a bastion host for administrators with features that promote infrastructure security. </p>
 
             <p><a class="btn btn-primary" href="javascript:window.open('https://github.com/skavanagh/KeyBox');"
                   role="button">View on Github &raquo;</a>
@@ -219,7 +220,7 @@
                    href="javascript:window.open('https://github.com/skavanagh/KeyBox/releases');"
                    role="button">Download Latest &raquo;</a>
             </p>
-            <p>This project is opensource and contributions are welcome!</p>
+
 
         </div>
 
@@ -229,6 +230,7 @@
             <h2>Easy Install &amp; Setup</h2>
 
             <p>Runs on any Java enabled system (Java is not required on client browser)</p>
+
             <p>Requires JDK 1.8 or greater<br/>A web socket supported browser</p>
 
             <p><a class="btn btn-success" href="javascript:window.open('https://github.com/skavanagh/KeyBox#keybox');"
@@ -239,14 +241,18 @@
         <div class="col-lg-4">
             <a name="contact"></a>
 
-	<h2>How can you support?</h2>
-	<p>Donations are always welcome. Any small contribution will keep this project running!</p>
+            <h2>How can you support?</h2>
+
+            <p>This project is opensource under the Apache 2.0 licence and contributions are welcome!</p>
+            <p>Donations are always welcome. Any small contribution will keep this project running!</p>
             <table align="center">
-		<tr>
-	            <td>
-			<span class="badge-paypal"><a href="https://www.paypal.me/SKavanagh" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>&nbsp;
-		   </td>
-		</tr>
+                <tr>
+                    <td>
+                        <span class="badge-paypal"><a href="https://www.paypal.me/SKavanagh"
+                                                      title="Donate to this project using Paypal"><img
+                                src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button"/></a></span>&nbsp;
+                    </td>
+                </tr>
             </table>
 
 
@@ -265,25 +271,24 @@
 
             <h2 class="featurette-heading">About KeyBox</h2>
 
-            <p class="lead">KeyBox generates its own public/private SSH key upon initial startup (To specify a custom
-                SSH key pair, see <a href="https://github.com/skavanagh/KeyBox#supplying-a-custom-ssh-key-pair">here</a>).
-                This key is placed in
-                the authorized_key file of the registered systems. KeyBox allows you to share terminal commands
+            <p class="lead">KeyBox generates its own public/private SSH key upon initial startup.
+                This key is placed in the authorized_key file of the registered systems. KeyBox allows you to share
+                terminal commands
                 and upload files to multiple systems simultaneously.
             </p>
-            <p class="lead">Once the sessions have
-                been opened you can select a single terminal window or any combination to run your commands. Additional
-                system
+
+            <p class="lead"> Additional system
                 administrators can be added and their terminal sessions and history audited. Also, KeyBox can manage,
-                distribute, and disable public keys that have been setup within the application. Key management is enabled 
+                distribute, and disable public keys that have been setup within the application. Key management is
+                enabled
                 by default to prevent unmanaged public keys and enforce best practices.
             </p>
 
             <p class="lead">
-                KeyBox layers TLS/SSL on top of SSH and acts as a bastion host for administration. Protocols are stacked 
-                (TLS/SSL + SSH) so infrastructure cannot be exposed through tunneling / port forwarding. More details 
-                can be found in the following whitepaper: <a 
-                href="http://www.sans.org/reading-room/whitepapers/vpns/security-implications-ssh-1180">The Security 
+                KeyBox layers TLS/SSL on top of SSH and acts as a bastion host for administration. Protocols are stacked
+                (TLS/SSL + SSH) so infrastructure cannot be exposed through tunneling / port forwarding. More details
+                can be found in the following whitepaper: <a
+                    href="http://www.sans.org/reading-room/whitepapers/vpns/security-implications-ssh-1180">The Security
                 Implications of SSH</a>.
             </p>
         </div>
@@ -295,9 +300,50 @@
 
     <hr class="featurette-divider">
     <div class="row featurette">
+        <div class="col-md-5" style="float:right">
+            <a name="benefits"></a>
+
+            <h2 class="featurette-heading">KeyBox Benefits</h2>
+
+            <ul class="list-group">
+                <li><strong>Centralized user control</strong> - Grant access to systems through administrative profiles
+                    and user accounts.
+                </li>
+                <li><strong>Auditable (experimental)</strong> - Audit the administrative activity on the systems.
+                    Prevents malicious users from deleting history or logs.
+                </li>
+                <li><strong>Prevent SSH key sprawl and access mismanagement</strong> - Administrators set keys and
+                    distribute to systems through profiles. Strong passphrases are enforced by default for SSH keys on
+                    registered systems. Also, any administrative key can be disabled forcing key rotation.
+                </li>
+                <li><strong>Productivity</strong> - Instead of making the same changes on systems individually, share
+                    commands across systems. Eliminates redundancy when patching or debugging issues.
+                    </span></li>
+                <li><strong>Portability</strong> - Run SSH through the browser without requiring client software or
+                    browser plugins.
+                </li>
+                <li><strong>Layered Protocols</strong> - Protocols are stacked (TLS/SSL + SSH) so infrastructure cannot
+                    be exposed through tunneling / port forwarding.
+                </li>
+                <li><strong>Infrastructure protection</strong> - A hardened version of KeyBox could act as a bastion
+                    host allowing for centralized administration through SSH, proxying traffic into a DMZ or perimeter
+                    network. (see diagram)
+                </li>
+
+            </ul>
+
+        </div>
+        <div class="col-md-7">
+            <img class="featurette-image img-responsive" data-src="img/keybox_dia.jpg/800x468/auto"
+                 src="img/keybox_dia.jpg" alt="Audit SSH Sessions"/></img>
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+    <div class="row featurette">
         <a name="terms"></a>
 
-        <div class="col-md-7" style="float:right;">
+        <div class="col-md-7">
             <h2 class="featurette-heading">Composite SSH terminals. <span class="text-muted">Total control.</span></h2>
 
             <p class="lead">Execute commands on multiple systems simultaneously. Upload files to selected systems. Once
@@ -313,7 +359,7 @@
 
     <hr class="featurette-divider">
     <div class="row featurette">
-        <div class="col-md-7">
+        <div class="col-md-7" style="float:right">
             <a name="public_keys"></a>
 
             <h2 class="featurette-heading">Manage, distribute, &amp; disable public SSH keys</h2>
@@ -323,7 +369,8 @@
                 when keys are set to be generated through the application. Users with full-privileges may review and
                 disable any administrative key forcing rotation. </p>
 
-            <p class="lead">With KeyBox users set or generate their own keys, discouraging private keys from being shared, sent over email, etc..</p>
+            <p class="lead">With KeyBox users set or generate their own keys, discouraging private keys from being
+                shared, sent over email, etc..</p>
 
         </div>
         <div class="col-md-5">
@@ -394,7 +441,7 @@
 
     <hr class="featurette-divider">
     <div class="row featurette">
-        <div class="col-md-7" style="float:right;">
+        <div class="col-md-7" style="float:right">
             <a name="access"></a>
 
             <h2 class="featurette-heading">Control user access. <span class="text-muted">Secure your systems.</span>
@@ -402,7 +449,8 @@
 
             <p class="lead">Create users and assign system profiles. Users can login to KeyBox via the web-console,
                 but have limited privileges and can only access systems that have been assigned through their
-                profile.</p>
+                profile. System access can be removed at anytime removing any keys the user has associated with the
+                system</p>
 
         </div>
         <div class="col-md-5" style="float:left;">
@@ -412,17 +460,17 @@
     </div>
 
 
-
     <hr class="featurette-divider">
     <div class="row featurette">
-        <div class="col-md-7" style="float:right;">
+        <div class="col-md-7">
             <a name="audit"></a>
 
             <h2 class="featurette-heading">Audit SSH sessions</h2>
 
-            <p class="lead">Users with full-privileges may audit other administrative user sessions. Ensure systems are
-                managed within organizational guidelines. (Disabled by default) </p>
-
+            <p class="lead">Once enabled, users with full-privileges may audit other administrative user sessions.
+                Ensure systems are
+                managed within organizational guidelines. Through its logging utility, KeyBox can be configured to send
+                logs to a central logging server. (eg. logstash)</p>
         </div>
         <div class="col-md-5" style="float:left;">
             <img class="featurette-image img-responsive" data-src="img/500x300/audit_sessions.png/500x300/auto"
@@ -432,54 +480,10 @@
 
     <hr class="featurette-divider">
     <div class="row featurette">
-        <div class="col-md-5">
-            <a name="benefits"></a>
 
-            <h2 class="featurette-heading">KeyBox Benefits</h2>
-
-            <p class="lead">
-                Some of the ideas explored with this project...
-            </p>
-
-            <ul class="list-group">
-                <li><strong>Centralized user control</strong> - Grant access to systems through administrative profiles
-                    and user accounts.
-                </li>
-                <li><strong>Auditable (experimental)</strong> - Audit the administrative activity on the systems.
-                    Prevents malicious users from deleting history or logs.
-                </li>
-                <li><strong>Prevent SSH key sprawl and access mismanagement</strong> - Administrators set keys and
-                    distribute to systems through profiles. Strong passphrases are enforced by default for SSH keys on
-                    registered systems. Also, any administrative key can be disabled forcing key rotation.
-                </li>
-                <li><strong>Productivity</strong> - Instead of making the same changes on systems individually, share
-                    commands across systems. Eliminates redundancy when patching or debugging issues.
-                    </span></li>
-                <li><strong>Portability</strong> - Run SSH through the browser without requiring client software or
-                    browser plugins.
-                </li>
-                <li><strong>Layered Protocols</strong> - Protocols are stacked (TLS/SSL + SSH) so infrastructure cannot
-                    be exposed through tunneling / port forwarding.
-                </li>
-                <li><strong>Infrastructure protection</strong> - A hardened version of KeyBox could act as a bastion
-                    host allowing for centralized administration through SSH, proxying traffic into a DMZ or perimeter
-                    network. (see diagram)
-                </li>
-
-            </ul>
-
-        </div>
         <div class="col-md-7">
-            <img class="featurette-image img-responsive" data-src="img/keybox_dia.jpg/800x468/auto"
-                 src="img/keybox_dia.jpg" alt="Audit SSH Sessions"/></img>
-        </div>
-    </div>
 
-    <hr class="featurette-divider">
-    <div class="row featurette">
-        <a name="see_more_ec2box"></a>
-
-        <div class="col-md-7" style="float:right;">
+            <a name="see_more_ec2box"></a>
 
             <h2 class="featurette-heading">EC2Box</h2>
 
@@ -494,19 +498,9 @@
             <p>
                 <a class="btn btn-primary" href="javascript:window.open('https://github.com/skavanagh/EC2Box');"
                    role="button">View on Github &raquo;</a></p>
+            <hr class="featurette-divider">
 
-        </div>
-        <div class="col-md-5" style="float:right;">
-            <img class="featurette-image img-responsive" data-src="img/500x300/ec2box.png/500x300/auto"
-                 src="img/500x300/ec2box.png" alt="EC2Box: Web-based SSH console for AWS EC2"/></img>
-        </div>
-    </div>
-
-    <hr class="featurette-divider">
-    <div class="row featurette">
-        <a name="see_more_openshift"></a>
-
-        <div class="col-md-7">
+            <a name="see_more_openshift"></a>
 
             <h2 class="featurette-heading">KeyBox-OpenShift</h2>
 
@@ -519,10 +513,9 @@
                    role="button">View on Github &raquo;</a></p>
 
         </div>
-        <div class="col-md-5">
-            <img class="featurette-image img-responsive" data-src="img/500x300/keybox-openshift.png/500x300/auto"
-                 src="img/500x300/keybox-openshift.png"
-                 alt="KeyBox-OpenShift: Web-based SSH console for OpenShfit"/></img>
+        <div class="col-md-5" style="float:right;">
+            <img class="featurette-image img-responsive" data-src="img/500x300/ec2box.png/500x300/auto"
+                 src="img/500x300/ec2box.png" alt="EC2Box: Web-based SSH console for AWS EC2"/></img>
         </div>
     </div>
 
